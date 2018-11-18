@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=romain_sings
+POSTGRES_USER=XTblBXevEroRftMPBViwkiaurdYSIfBJ
+POSTGRES_PASSWORD=xp203aoDUctC6EwXYcofa2HFmWIvavdpi69NNYeBRc0uVjQv8lDDeulZjoVLrad8
