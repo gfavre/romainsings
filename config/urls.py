@@ -5,8 +5,17 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
+from rest_framework import routers
+
+from romain_sings.songs.urls import router as songs_router
+
+
+router = routers.DefaultRouter()
+router.registry.extend(songs_router.registry)
+
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path('api/', include(router.urls)),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
@@ -20,7 +29,10 @@ urlpatterns = [
         include("romain_sings.users.urls", namespace="users"),
     ),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
+
+    path("songs/", include("romain_sings.songs.urls")),
+
+
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )

@@ -24,7 +24,7 @@ DEBUG = env.bool('DJANGO_DEBUG', False)
 # In Windows, this must be set to your system time zone.
 TIME_ZONE = 'CET'
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr_CH'
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -70,7 +70,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'romain_sings.users.apps.UsersAppConfig',
-    # Your stuff: custom apps go here
+    'romain_sings.songs.apps.SongsConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -248,3 +248,4 @@ SOCIALACCOUNT_ADAPTER = 'romain_sings.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+SONOS_BASE_DIR = env.path('SONOS_BASE_DIR', default=MEDIA_ROOT)

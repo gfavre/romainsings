@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add new audio file{% endblock %}
+
+{% block content %}
+  <h1>Add new audio file</h1>
+  <form class="form-horizontal" method="post" action="{% url 'songs:upload' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="control-group">
+      <div class="controls">
+        <button type="submit" class="btn">Add</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}
