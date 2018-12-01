@@ -30,7 +30,7 @@ urlpatterns = [
     ),
     path("accounts/", include("allauth.urls")),
 
-    path("songs/", include("romain_sings.songs.urls")),
+    path("songs/", include("romain_sings.songs.urls", namespace="songs")),
 
 
 ] + static(

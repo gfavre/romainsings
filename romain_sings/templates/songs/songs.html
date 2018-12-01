@@ -1,0 +1,15 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Songs</title>
+    <link href="{% static 'css/card.css' %}" rel="stylesheet">
+</head>
+<body>
+{% for song in songs %}
+{% include "songs/card.inc.html" with song=song %}
+{% endfor %}
+
+</body>
+</html>

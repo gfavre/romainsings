@@ -1,0 +1,10 @@
+<section class="song">
+  <img src="{{ song.illustration.url }}" class="art"/>
+  <img src="{{ song.qrcode.url }}" class="qrcode"/>
+  <div class="labels">
+    <h3>{{ song.title }}</h3>
+    <p class="artist"><small>By</small> {{ song.artist }}</p>
+    {% if song.album %}<p class="album"><small>From</small> {{ song.album }}{% endif %}
+  </div>
+</section>
+

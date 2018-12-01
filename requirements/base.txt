@@ -19,3 +19,6 @@ coreapi==2.3.3  # https://github.com/core-api/python-client
 
 eyed3==0.8.7  # mp3 tags
 pylast==2.4.0  # required by eyed3 cmd
+
+
+qrcode[pil]==6.0

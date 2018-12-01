@@ -2,7 +2,7 @@
 from rest_framework import viewsets
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 
 from .forms import SongUploadForm
 from .models import Song
@@ -21,3 +21,8 @@ class SongUploadView(CreateView):
     template_name = 'songs/song_upload.html'
     success_url = reverse_lazy('songs:upload')
 
+
+class AllSongsView(ListView):
+    queryset = Song.objects.order_by('-created')
+    template_name = "songs/songs.html"
+    context_object_name = 'songs'
