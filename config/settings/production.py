@@ -6,7 +6,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['romainpi.local', '0.0.0.0:5000', 'romainpi.local:5000'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['romainpi.local', '0.0.0.0'])
 
 # DATABASES
 # ------------------------------------------------------------------------------
