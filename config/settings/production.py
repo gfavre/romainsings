@@ -55,7 +55,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # region http://stackoverflow.com/questions/10390244/
 # Full-fledge class: https://stackoverflow.com/a/18046120/104731
 MEDIA_ROOT = '/share/'
-MEDIA_URL = f'https://romainpi.local/media/'
+MEDIA_URL = 'https://romainpi.local/media/'
 
 # TEMPLATES
 # ------------------------------------------------------------------------------
