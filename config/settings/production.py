@@ -27,7 +27,7 @@ CACHES = {
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# https://docs.djangoproject.com/en/dev/ref/settings/#secure-ssl-redirect
+# https://docs.djangoproject.com/en/dev/ref/settings/#secsure-ssl-redirect
 # SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
 # SESSION_COOKIE_SECURE = True
@@ -47,7 +47,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool('DJANGO_SECURE_CONTENT_TYPE_NOSNIFF', def
 
 # STATIC
 # ------------------------
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'romain_sings.storage.WhiteNoiseStaticFilesStorage'
 
 # MEDIA
 # ------------------------------------------------------------------------------
