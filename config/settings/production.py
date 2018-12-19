@@ -54,7 +54,7 @@ STATICFILES_STORAGE = 'romain_sings.storage.WhiteNoiseStaticFilesStorage'
 
 # region http://stackoverflow.com/questions/10390244/
 # Full-fledge class: https://stackoverflow.com/a/18046120/104731
-MEDIA_ROOT = '/share/'
+MEDIA_ROOT = env.str('MEDIA_ROOT', default=str(APPS_DIR('media')))
 MEDIA_URL = 'http://romainpi.local/media/'
 
 # TEMPLATES
