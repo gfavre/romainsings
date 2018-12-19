@@ -159,3 +159,4 @@ LOGGING = {
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+SONOS_BASE_DIR = str(env.path('SONOS_BASE_DIR', default=MEDIA_ROOT))
