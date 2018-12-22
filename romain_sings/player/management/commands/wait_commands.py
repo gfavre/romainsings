@@ -15,12 +15,13 @@ def start_scan(process):
             handle_qrcode(qrcode)
 
 
-
-def handle(self, *args, **options):
-    p = os.popen('/usr/bin/zbarcam --prescale=300x200', 'r')
-    try:
-        start_scan(p)
-    except KeyboardInterrupt:
-        print('Stopping scanner...')
-    finally:
-        p.close()
+class Command(BaseCommand):
+    def handle(self, *args, **options):
+        p = os.popen('/usr/bin/zbarcam --prescale=300x200', 'r')
+        try:
+            self.stdout.write('opening software')
+            start_scan(p)
+        except KeyboardInterrupt:
+            self.stdout.write('Stopping scanner...')
+        finally:
+            p.close()
