@@ -7,6 +7,8 @@ from ...qrplay import handle_qrcode
 
 
 def start_scan(process, outstream):
+    outstream.write('Software opened, waiting QR')
+
     while True:
         data = process.readline()
         qrcode = str(data)[8:]
@@ -18,10 +20,10 @@ def start_scan(process, outstream):
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        p = os.popen('/usr/bin/zbarcam --prescale=300x200 --nodisplay', 'r')
+        self.stdout.write('opening software')
+        process = os.popen('/usr/bin/zbarcam --prescale=300x200 --nodisplay', 'r')
         try:
-            self.stdout.write('opening software')
-            start_scan(self.stdout)
+            start_scan(process, self.stdout)
         except KeyboardInterrupt:
             self.stdout.write('Stopping scanner...')
         finally:
