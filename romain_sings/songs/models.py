@@ -11,6 +11,7 @@ from django.utils.text import slugify
 
 from model_utils.models import TimeStampedModel
 import qrcode
+import soco
 
 
 sonos_storage = FileSystemStorage(location=settings.SONOS_BASE_DIR, base_url='/uploads')
@@ -25,6 +26,7 @@ def qrcode_path(instance, filename):
 
 
 PLAY_SONG_IMMEDIATELY = 'play'
+SMB_PROTOCOL = 'x-file-cifs'
 
 
 class Song(TimeStampedModel):
@@ -55,6 +57,17 @@ class Song(TimeStampedModel):
         if not self.qrcode:
             self.build_qr(commit=False)
         super().save(*args, **kwargs)
+
+    @property
+    def play_path(self):
+        return '{}://{}{}'.format(SMB_PROTOCOL,
+                                  settings.SONOS_MOUNT_HOSTNAME,
+                                  settings.SONOS_BASE_DIR(str(self.file)))
+
+    def play(self):
+        current_device = settings.SONOS_ROOM_NAME
+        spkr = soco.discovery.by_name(current_device).group.coordinator
+        spkr.play_uri(self.play_path)
 
 
 # TODO: modèle de statistiques de lecture
