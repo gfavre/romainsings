@@ -250,3 +250,5 @@ SOCIALACCOUNT_ADAPTER = 'romain_sings.users.adapters.SocialAccountAdapter'
 # Your stuff...
 # ------------------------------------------------------------------------------
 SONOS_BASE_DIR = env.path('SONOS_BASE_DIR', default=MEDIA_ROOT)
+SONOS_MOUNT_HOSTNAME = env.str('SONOS_MOUNT_HOSTNAME', 'localhost')
+SONOS_ROOM_NAME = env.str('SONOS_ROOM_NAME', default='')
