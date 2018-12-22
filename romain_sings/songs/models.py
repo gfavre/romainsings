@@ -33,7 +33,7 @@ class Song(TimeStampedModel):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     artist = models.CharField(max_length=255, blank=True)
-    illustration = models.ImageField(null=True, blank=True, upload_to=qrcode_path())
+    illustration = models.ImageField(null=True, blank=True, upload_to=qrcode_path)
     qrcode = models.ImageField(null=True, blank=True, upload_to=qrcode_path)
     file = models.FileField(null=True, upload_to=upload_to_sonos, storage=sonos_storage)
 
