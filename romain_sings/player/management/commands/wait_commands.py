@@ -27,4 +27,4 @@ class Command(BaseCommand):
         except KeyboardInterrupt:
             self.stdout.write('Stopping scanner...')
         finally:
-            p.close()
+            process.close()

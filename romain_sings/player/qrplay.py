@@ -10,11 +10,16 @@ SMB_PROTOCOL = 'x-file-cifs'
 player = soco.discovery.by_name(settings.SONOS_ROOM_NAME).group.coordinator
 
 
-
-
 def play(qr_id):
-    song = Song.objects.filter(uuid__startswith=qr_id).first()
-    player.play_uri(song.play_path)
+    try:
+        value = hex(int(qr_id)).split('x')[-1]
+    except:
+        return
+    try:
+        song = Song.objects.filter(uuid__startswith=value).first()
+        player.play_uri(song.play_path)
+    except AttributeError:
+        return
 
 
 def stop():
