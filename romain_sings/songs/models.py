@@ -55,9 +55,9 @@ class Song(TimeStampedModel):
             self.save()
 
     def save(self, *args, **kwargs):
-        if not self.qrcode:
-            self.build_qr(commit=False)
         super().save(*args, **kwargs)
+        if not self.qrcode:
+            self.build_qr(commit=True)
 
     @property
     def play_path(self):
