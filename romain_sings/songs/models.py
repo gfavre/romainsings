@@ -14,8 +14,8 @@ import qrcode
 import soco
 
 
-media_storage = FileSystemStorage(location=str(settings.MEDIA_ROOT), base_url='/uploads/media')
-sonos_storage = FileSystemStorage(location=str(settings.SONOS_BASE_DIR), base_url='/uploads/songs')
+media_storage = FileSystemStorage(location=str(settings.MEDIA_ROOT), base_url='/uploads')
+sonos_storage = FileSystemStorage(location=str(settings.SONOS_BASE_DIR), base_url='/uploads')
 
 
 def upload_to_sonos(instance, filename):
