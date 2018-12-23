@@ -14,7 +14,8 @@ import qrcode
 import soco
 
 
-sonos_storage = FileSystemStorage(location=str(settings.SONOS_BASE_DIR), base_url='/uploads')
+media_storage = FileSystemStorage(location=str(settings.MEDIA_ROOT), base_url='/uploads/media')
+sonos_storage = FileSystemStorage(location=str(settings.SONOS_BASE_DIR), base_url='/uploads/songs')
 
 
 def upload_to_sonos(instance, filename):
@@ -33,8 +34,8 @@ class Song(TimeStampedModel):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     artist = models.CharField(max_length=255, blank=True)
-    illustration = models.ImageField(null=True, blank=True, upload_to=qrcode_path)
-    qrcode = models.ImageField(null=True, blank=True, upload_to=qrcode_path)
+    illustration = models.ImageField(null=True, blank=True, upload_to=qrcode_path, storage=media_storage)
+    qrcode = models.ImageField(null=True, blank=True, upload_to=qrcode_path, storage=media_storage)
     file = models.FileField(null=True, upload_to=upload_to_sonos, storage=sonos_storage)
 
     @property
