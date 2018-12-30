@@ -4,6 +4,8 @@ from django.conf import settings
 import soco
 
 from romain_sings.songs.models import Song, PLAY_SONG_IMMEDIATELY
+from .models import PlayedEvent
+
 
 SMB_PROTOCOL = 'x-file-cifs'
 
@@ -17,6 +19,7 @@ def play(qr_id):
         return
     try:
         song = Song.objects.filter(uuid__startswith=value).first()
+        PlayedEvent.objects.create(song=song)
         player.play_uri(song.play_path)
     except AttributeError:
         return
