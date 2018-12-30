@@ -1,5 +1,7 @@
+{% load staticfiles %}
 <section class="song">
-  <img src="{{ song.illustration.url }}" class="art"/>
+  <img src="{% if song.illustration %}{{ song.illustration.url }}{% else %}{% static "images/blank.png" %}{% endif %}"
+       class="art"/>
   <img src="{{ song.qrcode.url }}" class="qrcode"/>
   <div class="labels">
     <h3>{{ song.title }}</h3>

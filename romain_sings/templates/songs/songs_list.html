@@ -71,7 +71,7 @@
     <button type="submit" class="btn btn-primary">{% trans "Print cards" %}</button>
   </form>
   <table class="table" id="songs">
-    <thead>
+    <thead class="thead-dark">
       <tr>
         <th></th>
         <th>{% trans "Title" %}</th>
@@ -83,7 +83,9 @@
     <tbody>
     {% for song in songs %}
       <tr data-id="{{ song.uuid }}">
-        <td><img src="{{ song.illustration.url }}" style="height:60px;"/></td>
+        <td {% if not song.illustration %}class="table-danger"{% endif %}>
+          {% if song.illustration %}<img src="{{ song.illustration.url }}" style="height:60px;"/>{% endif %}
+        </td>
         <td>{{ song.title }}</td>
         <td>{{ song.artist }}</td>
         <td data-order="{{ song.created | date:"c" }}">{{ song.created|naturaltime }}</td>
