@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags staticfiles humanize i18n  %}
+
+{% block title %}{% trans "All songs available" %}{% endblock %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/sl-1.2.6/datatables.min.css"/>
+{% endblock %}
+
+{% block javascript %}
+  {{ block.super }}
+
+  <script type="text/javascript"
+          src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/sl-1.2.6/datatables.min.js"></script>
+  <script>
+    $(document).ready( function () {
+      var table = $('#songs').DataTable({
+        "ordering": true,
+        "order": [[3, 'desc']],
+        "columnDefs": [{ "orderable": false, "targets": [0, 4] }],
+        "lengthMenu": [[ 8, 16, 64, -1 ], [ 8, 16, 64, "{% trans "All" %}" ]],
+        "select": {"items": 'row', "style": 'multi'}
+
+      });
+      $orderField = $('#order-field');
+      $orderDirection = $('#order-direction');
+
+      table.on('order.dt', function () {
+        var order = table.order();
+        $orderDirection.val(order[0][1]);
+        switch (order[0][0]){
+          case 1:
+            orderValue = 'title';
+            break;
+          case 2:
+            orderValue = 'artist';
+            break;
+          case 3:
+            orderValue = 'created';
+            break;
+          default:
+            orderValue = 'created';
+        }
+        $orderField.val(orderValue);
+      });
+
+      $('#cards-form').on( "submit", function(event) {
+        table.rows({selected: true}).nodes().each(function (row) {
+          $('<input>').attr({
+            type: 'hidden',
+            name: 's',
+            value: $(row).data('id')
+          }).appendTo('form');
+        });
+      });
+    });
+  </script>
+  {% endblock %}
+
+
+{% block content %}
+
+
+
+  <h1>{% trans "All songs available" %}</h1>
+  <form method="GET" action="{% url 'songs:cards' %}" id="cards-form">
+    <input type="hidden" id="order-field" name="of" value="created">
+    <input type="hidden" id="order-direction" name="od" value="asc">
+    <button type="submit" class="btn btn-primary">{% trans "Print cards" %}</button>
+  </form>
+  <table class="table" id="songs">
+    <thead>
+      <tr>
+        <th></th>
+        <th>{% trans "Title" %}</th>
+        <th>{% trans "Artist" %}</th>
+        <th>{% trans "Added on" %}</th>
+        <th>{% trans "Actions" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for song in songs %}
+      <tr data-id="{{ song.uuid }}">
+        <td><img src="{{ song.illustration.url }}" style="height:60px;"/></td>
+        <td>{{ song.title }}</td>
+        <td>{{ song.artist }}</td>
+        <td data-order="{{ song.created | date:"c" }}">{{ song.created|naturaltime }}</td>
+        <td></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
