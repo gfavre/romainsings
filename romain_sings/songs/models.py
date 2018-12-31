@@ -38,6 +38,9 @@ class Song(TimeStampedModel):
     qrcode = models.ImageField(null=True, blank=True, upload_to=qrcode_path, storage=media_storage)
     file = models.FileField(null=True, upload_to=upload_to_sonos, storage=sonos_storage)
 
+    class Meta:
+        ordering = ('-created', )
+
     @property
     def qr_id(self):
         return str(self.uuid.fields[0])

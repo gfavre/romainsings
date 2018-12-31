@@ -1,17 +1,32 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags i18n %}
 
-{% block title %}Add new audio file{% endblock %}
+{% block title %}{% trans "Add new song" %}{% endblock %}
 
 {% block content %}
-  <h1>Add new audio file</h1>
-  <form class="form-horizontal" method="post" action="{% url 'songs:upload' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <div class="control-group">
-      <div class="controls">
-        <button type="submit" class="btn">Add</button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sparkline13-list shadow-reset">
+          <div class="sparkline13-hd">
+            <div class="main-sparkline13-hd">
+              <h1>{% trans "Add new song" %}</h1>
+            </div>
+          </div>
+          <div class="sparkline-content">
+            <form class="form-horizontal" method="post" action="{% url 'songs:upload' %}" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <div class="control-group login-btn-inner">
+                <div class="controls">
+                  <button type="submit" class="btn btn-primary login-submit-cs">{% trans "Add" %}</button>
+                </div>
+              </div>
+            </form>
+            <div class="clearfix"></div>
+          </div>
+        </div>
       </div>
     </div>
-  </form>
+  </div>
 {% endblock %}
