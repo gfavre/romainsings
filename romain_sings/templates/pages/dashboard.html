@@ -1,14 +1,43 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n staticfiles json %}
 {% block content %}
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-12">
-        <div class="sparkline13-list shadow-reset">
+      <div class="col-lg-8 ">
+        <div class="sparkline13-list shadow-reset mg-tb-30">
           <div class="sparkline13-hd">
             <div class="main-sparkline13-hd">
-              <h1>{% trans "Top 5" %}</h1>
+              <h2>{% trans "Usage per day" %}</h2>
+            </div>
+          </div>
+          <div class="sparkline-content">
+            <div id="basic-chart">
+                <canvas id="basiclinechart" width="600" height="295"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="income-dashone-total income-monthly shadow-reset mg-tb-30">
+          <div class="income-title">
+            <div class="main-income-head">
+              <h2>{% trans "Plays" %}</h2>
+              <div class="main-income-phara order-cl">
+                                            <p>from start</p>
+                                        </div>
+            </div>
+          </div>
+          <div class="sparkline-content">
+            <h3>{{ total_plays }} plays</h3>
+            <p>out of {{ total_songs }} songs</p>
+          </div>
+        </div>
+
+        <div class="income-dashone-total orders-monthly shadow-reset nt-mg-b-30">
+          <div class="income-title">
+            <div class="main-income-head">
+              <h2>{% trans "Top 5" %}</h2>
             </div>
           </div>
           <div class="sparkline-content">
@@ -21,10 +50,65 @@
             </ol>
           </div>
         </div>
+
       </div>
+
     </div>
+
   </div>
 
 
+
+{% endblock %}
+{% block javascript %}
+  {{ block.super }}
+  <script src="{% static "js/Chart.js" %}"></script>
+  <script>
+var ctx = document.getElementById("basiclinechart");
+let myChart = new Chart(ctx, {
+    type: 'line',
+
+    data: {
+        labels: {{ play_per_day_labels|to_json }},
+        datasets: [{
+            data: {{ play_per_day_values|to_json }},
+            borderColor: '#07C',
+            pointBackgroundColor: "#FFF",
+            pointBorderColor: "#07C",
+            pointHoverBackgroundColor: "#07C",
+            pointHoverBorderColor: "#FFF",
+            pointRadius: 4,
+            pointHoverRadius: 4,
+            fill: false,
+            tension: 0.15
+        }]
+    },
+    options: {
+        responsive: false,
+        tooltips: {
+            displayColors: false,
+            callbacks: {
+                label: function(e, d) {
+                    return;
+                },
+                title: function() {
+                    return;
+                }
+            }
+        },
+        legend: {
+            display: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 90
+                }
+            }]
+        }
+    }
+});
+
+  </script>
 
 {% endblock %}
