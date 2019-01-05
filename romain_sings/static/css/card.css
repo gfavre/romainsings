@@ -9,7 +9,7 @@ body {
   width: 360px;
   height: 320px;
   float: left;
-  border: 1px dashed #999;
+  border: 0.5pt dashed #999;
   width: 360px;
   height: 320px;
   page-break-inside: avoid;

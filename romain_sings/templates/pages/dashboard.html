@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sparkline13-list shadow-reset">
+          <div class="sparkline13-hd">
+            <div class="main-sparkline13-hd">
+              <h1>{% trans "Top 5" %}</h1>
+            </div>
+          </div>
+          <div class="sparkline-content">
+            <ol>
+            {% for top in top5 %}
+              <li>
+                {{ top.song__title }} ({% blocktrans with count=top.total_play %}{{ count }} plays{% endblocktrans %})
+              </li>
+            {% endfor %}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

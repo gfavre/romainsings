@@ -8,13 +8,13 @@ from django.views import defaults as default_views
 from rest_framework import routers
 
 from romain_sings.songs.urls import router as songs_router
-
+from romain_sings.player import views as player_views
 
 router = routers.DefaultRouter()
 router.registry.extend(songs_router.registry)
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("", player_views.DashboardView.as_view(), name="home"),
     path('api/', include(router.urls)),
     path(
         "about/",
